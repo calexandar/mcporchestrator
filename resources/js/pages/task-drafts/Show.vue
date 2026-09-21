@@ -14,7 +14,10 @@ import { Label } from '@/components/ui/label';
 import { dashboard } from '@/routes';
 import { show as projectShow } from '@/routes/projects';
 import { index as taskDraftsIndex } from '@/routes/task-drafts';
-import { approve as approveDraft, reject as rejectDraft } from '@/routes/task-drafts';
+import {
+    approve as approveDraft,
+    reject as rejectDraft,
+} from '@/routes/task-drafts';
 
 const props = defineProps<{
     draft: {
@@ -65,10 +68,12 @@ function reject(): void {
     <div class="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 p-4">
         <div>
             <div class="flex items-center gap-3">
-                <h1 class="text-2xl font-semibold tracking-tight">{{ draft.title }}</h1>
+                <h1 class="text-2xl font-semibold tracking-tight">
+                    {{ draft.title }}
+                </h1>
                 <Badge variant="secondary">{{ draft.status }}</Badge>
             </div>
-            <p class="mt-1 text-muted-foreground text-sm">
+            <p class="text-muted-foreground mt-1 text-sm">
                 <Link
                     v-if="draft.project"
                     :href="projectShow(draft.project.id)"
@@ -83,7 +88,9 @@ function reject(): void {
                     · created by {{ draft.creatorUser.name }}
                 </span>
                 <span v-if="draft.approver" class="text-muted-foreground">
-                    · {{ draft.status === 'rejected' ? 'rejected' : 'approved' }} by {{ draft.approver.name }}
+                    ·
+                    {{ draft.status === 'rejected' ? 'rejected' : 'approved' }}
+                    by {{ draft.approver.name }}
                 </span>
             </p>
         </div>
@@ -94,16 +101,24 @@ function reject(): void {
             </CardHeader>
             <CardContent class="space-y-3 text-sm">
                 <div>
-                    <p class="text-muted-foreground text-xs uppercase">Description</p>
-                    <p v-if="draft.description" class="whitespace-pre-wrap">{{ draft.description }}</p>
+                    <p class="text-muted-foreground text-xs uppercase">
+                        Description
+                    </p>
+                    <p v-if="draft.description" class="whitespace-pre-wrap">
+                        {{ draft.description }}
+                    </p>
                     <p v-else class="text-muted-foreground">No description.</p>
                 </div>
                 <div v-if="draft.external_ref">
-                    <p class="text-muted-foreground text-xs uppercase">External reference</p>
+                    <p class="text-muted-foreground text-xs uppercase">
+                        External reference
+                    </p>
                     <p class="font-mono">{{ draft.external_ref }}</p>
                 </div>
                 <div v-if="draft.rejection_reason">
-                    <p class="text-muted-foreground text-xs uppercase">Rejection reason</p>
+                    <p class="text-muted-foreground text-xs uppercase">
+                        Rejection reason
+                    </p>
                     <p>{{ draft.rejection_reason }}</p>
                 </div>
             </CardContent>
@@ -113,7 +128,8 @@ function reject(): void {
             <CardHeader>
                 <CardTitle class="text-base">Review</CardTitle>
                 <CardDescription>
-                    Approving publishes this draft as a task. Rejecting requires a reason.
+                    Approving publishes this draft as a task. Rejecting requires
+                    a reason.
                 </CardDescription>
             </CardHeader>
             <CardContent class="space-y-6">
@@ -131,7 +147,10 @@ function reject(): void {
                         placeholder="Explain why this draft is rejected."
                         class="border-input placeholder:text-muted-foreground focus-visible:ring-ring/50 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50"
                     />
-                    <p v-if="rejectForm.errors.reason" class="text-destructive text-sm">
+                    <p
+                        v-if="rejectForm.errors.reason"
+                        class="text-destructive text-sm"
+                    >
                         {{ rejectForm.errors.reason }}
                     </p>
                     <Button

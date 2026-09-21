@@ -44,7 +44,9 @@ const filters: Array<{ label: string; value: string | undefined }> = [
     { label: 'Published', value: 'published' },
 ];
 
-function statusVariant(status: string): 'default' | 'secondary' | 'destructive' | 'outline' {
+function statusVariant(
+    status: string,
+): 'default' | 'secondary' | 'destructive' | 'outline' {
     if (status === 'rejected') return 'destructive';
     if (status === 'draft') return 'default';
     return 'secondary';
@@ -58,7 +60,8 @@ function statusVariant(status: string): 'default' | 'secondary' | 'destructive' 
         <div>
             <h1 class="text-2xl font-semibold tracking-tight">Task drafts</h1>
             <p class="text-muted-foreground text-sm">
-                Drafts created over MCP must be reviewed and approved or rejected by a human.
+                Drafts created over MCP must be reviewed and approved or
+                rejected by a human.
             </p>
         </div>
 
@@ -68,9 +71,21 @@ function statusVariant(status: string): 'default' | 'secondary' | 'destructive' 
                 :key="filter.label"
                 as-child
                 :size="'sm'"
-                :variant="statusFilter === (filter.value ?? null) ? 'default' : 'outline'"
+                :variant="
+                    statusFilter === (filter.value ?? null)
+                        ? 'default'
+                        : 'outline'
+                "
             >
-                <Link :href="taskDraftsIndex({ query: filter.value ? { status: filter.value } : undefined })">
+                <Link
+                    :href="
+                        taskDraftsIndex({
+                            query: filter.value
+                                ? { status: filter.value }
+                                : undefined,
+                        })
+                    "
+                >
                     {{ filter.label }}
                 </Link>
             </Button>
@@ -81,20 +96,32 @@ function statusVariant(status: string): 'default' | 'secondary' | 'destructive' 
                 <div class="flex items-start justify-between gap-4">
                     <CardTitle class="flex items-center gap-2">
                         <FilePenLine class="text-primary size-5" />
-                        <Link :href="show(draft.id)" class="hover:underline">{{ draft.title }}</Link>
+                        <Link :href="show(draft.id)" class="hover:underline">{{
+                            draft.title
+                        }}</Link>
                     </CardTitle>
-                    <Badge :variant="statusVariant(draft.status)">{{ draft.status }}</Badge>
+                    <Badge :variant="statusVariant(draft.status)">{{
+                        draft.status
+                    }}</Badge>
                 </div>
                 <CardDescription v-if="draft.description" class="line-clamp-2">
                     {{ draft.description }}
                 </CardDescription>
             </CardHeader>
-            <CardContent class="flex items-center justify-between gap-4 text-sm">
-                <span class="muted-foreground truncate">{{ draft.project?.name }}</span>
-                <span class="muted-foreground shrink-0">{{ draft.creatorToken?.name ?? 'web' }}</span>
+            <CardContent
+                class="flex items-center justify-between gap-4 text-sm"
+            >
+                <span class="muted-foreground truncate">{{
+                    draft.project?.name
+                }}</span>
+                <span class="muted-foreground shrink-0">{{
+                    draft.creatorToken?.name ?? 'web'
+                }}</span>
             </CardContent>
         </Card>
 
-        <p v-if="!drafts.length" class="text-muted-foreground text-sm">No drafts match this filter.</p>
+        <p v-if="!drafts.length" class="text-muted-foreground text-sm">
+            No drafts match this filter.
+        </p>
     </div>
 </template>

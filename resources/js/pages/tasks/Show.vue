@@ -31,7 +31,12 @@ defineProps<{
         created_at: string | null;
         creator: { id: number; name: string } | null;
     }>;
-    drafts: Array<{ id: number; title: string; status: string; created_at: string | null }>;
+    drafts: Array<{
+        id: number;
+        title: string;
+        status: string;
+        created_at: string | null;
+    }>;
 }>();
 
 defineOptions({
@@ -50,7 +55,9 @@ defineOptions({
     <div class="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 p-4">
         <div>
             <div class="flex items-center gap-3">
-                <h1 class="text-2xl font-semibold tracking-tight">{{ task.title }}</h1>
+                <h1 class="text-2xl font-semibold tracking-tight">
+                    {{ task.title }}
+                </h1>
                 <Badge variant="secondary">{{ task.status }}</Badge>
                 <Badge variant="outline">{{ task.priority }}</Badge>
             </div>
@@ -62,8 +69,12 @@ defineOptions({
                 >
                     {{ task.project.name }}
                 </Link>
-                <span v-if="task.creator" class="text-muted-foreground"> · created by {{ task.creator.name }}</span>
-                <span v-if="task.approver" class="text-muted-foreground"> · approved by {{ task.approver.name }}</span>
+                <span v-if="task.creator" class="text-muted-foreground">
+                    · created by {{ task.creator.name }}</span
+                >
+                <span v-if="task.approver" class="text-muted-foreground">
+                    · approved by {{ task.approver.name }}</span
+                >
             </p>
         </div>
 
@@ -72,8 +83,12 @@ defineOptions({
                 <CardTitle class="text-base">Description</CardTitle>
             </CardHeader>
             <CardContent>
-                <p v-if="task.description" class="whitespace-pre-wrap text-sm">{{ task.description }}</p>
-                <p v-else class="text-muted-foreground text-sm">No description.</p>
+                <p v-if="task.description" class="text-sm whitespace-pre-wrap">
+                    {{ task.description }}
+                </p>
+                <p v-else class="text-muted-foreground text-sm">
+                    No description.
+                </p>
             </CardContent>
         </Card>
 
@@ -86,8 +101,13 @@ defineOptions({
                 <ul v-if="notes.length" class="divide-y">
                     <li v-for="note in notes" :key="note.id" class="py-2">
                         <p class="font-medium">{{ note.title }}</p>
-                        <p class="text-muted-foreground text-sm">{{ note.body }}</p>
-                        <p v-if="note.creator" class="text-muted-foreground mt-1 text-xs">
+                        <p class="text-muted-foreground text-sm">
+                            {{ note.body }}
+                        </p>
+                        <p
+                            v-if="note.creator"
+                            class="text-muted-foreground mt-1 text-xs"
+                        >
                             {{ note.creator.name }}
                         </p>
                     </li>

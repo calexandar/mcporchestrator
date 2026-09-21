@@ -416,7 +416,7 @@ Example:
 
 ```json
 {
-  "operation_id": "create-task-01JXYZ..."
+    "operation_id": "create-task-01JXYZ..."
 }
 ```
 
@@ -621,9 +621,9 @@ Input:
 
 ```json
 {
-  "search": "optional string",
-  "status": "optional active|archived",
-  "limit": 20
+    "search": "optional string",
+    "status": "optional active|archived",
+    "limit": 20
 }
 ```
 
@@ -635,14 +635,14 @@ Example:
 
 ```json
 {
-  "projects": [
-    {
-      "id": 1,
-      "name": "Laravel MCP Lab",
-      "slug": "laravel-mcp-lab",
-      "status": "active"
-    }
-  ]
+    "projects": [
+        {
+            "id": 1,
+            "name": "Laravel MCP Lab",
+            "slug": "laravel-mcp-lab",
+            "status": "active"
+        }
+    ]
 }
 ```
 
@@ -666,7 +666,7 @@ Input:
 
 ```json
 {
-  "project_id": 1
+    "project_id": 1
 }
 ```
 
@@ -698,10 +698,10 @@ Input:
 
 ```json
 {
-  "project_id": 1,
-  "status": "todo",
-  "priority": "high",
-  "limit": 20
+    "project_id": 1,
+    "status": "todo",
+    "priority": "high",
+    "limit": 20
 }
 ```
 
@@ -758,11 +758,11 @@ Input:
 
 ```json
 {
-  "operation_id": "unique-operation-id",
-  "project_id": 1,
-  "title": "Add MCP audit log viewer",
-  "description": "Create an admin page...",
-  "priority": "medium"
+    "operation_id": "unique-operation-id",
+    "project_id": 1,
+    "title": "Add MCP audit log viewer",
+    "description": "Create an admin page...",
+    "priority": "medium"
 }
 ```
 
@@ -782,12 +782,12 @@ Return:
 
 ```json
 {
-  "draft": {
-    "id": 12,
-    "project_id": 1,
-    "title": "Add MCP audit log viewer",
-    "status": "draft"
-  }
+    "draft": {
+        "id": 12,
+        "project_id": 1,
+        "title": "Add MCP audit log viewer",
+        "status": "draft"
+    }
 }
 ```
 
@@ -811,11 +811,11 @@ Input:
 
 ```json
 {
-  "operation_id": "unique-operation-id",
-  "draft_id": 12,
-  "expected_updated_at": "2026-09-21T09:00:00Z",
-  "title": "Updated title",
-  "description": "Updated description"
+    "operation_id": "unique-operation-id",
+    "draft_id": 12,
+    "expected_updated_at": "2026-09-21T09:00:00Z",
+    "title": "Updated title",
+    "description": "Updated description"
 }
 ```
 
@@ -1074,17 +1074,17 @@ Document:
 
 ```json
 {
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "laravel-mcp-lab": {
-      "type": "remote",
-      "url": "http://localhost:8000/api/mcp",
-      "enabled": true,
-      "headers": {
-        "Authorization": "Bearer {env:LARAVEL_MCP_TOKEN}"
-      }
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "laravel-mcp-lab": {
+            "type": "remote",
+            "url": "http://localhost:8000/api/mcp",
+            "enabled": true,
+            "headers": {
+                "Authorization": "Bearer {env:LARAVEL_MCP_TOKEN}"
+            }
+        }
     }
-  }
 }
 ```
 
@@ -1146,16 +1146,12 @@ Example:
 
 ```json
 {
-  "name": "tasks:create-draft",
-  "description": "Create a task draft for human review.",
-  "inputSchema": {
-    "type": "object",
-    "required": [
-      "operation_id",
-      "project_id",
-      "title"
-    ]
-  }
+    "name": "tasks:create-draft",
+    "description": "Create a task draft for human review.",
+    "inputSchema": {
+        "type": "object",
+        "required": ["operation_id", "project_id", "title"]
+    }
 }
 ```
 

@@ -50,9 +50,14 @@ defineOptions({
                 <CardHeader>
                     <CardTitle class="flex items-center gap-2">
                         <ListTodo class="text-primary size-5" />
-                        <Link :href="show(task.id)" class="hover:underline">{{ task.title }}</Link>
+                        <Link :href="show(task.id)" class="hover:underline">{{
+                            task.title
+                        }}</Link>
                     </CardTitle>
-                    <CardDescription v-if="task.description" class="line-clamp-2">
+                    <CardDescription
+                        v-if="task.description"
+                        class="line-clamp-2"
+                    >
                         {{ task.description }}
                     </CardDescription>
                 </CardHeader>
@@ -61,11 +66,15 @@ defineOptions({
                         <Badge variant="secondary">{{ task.status }}</Badge>
                         <Badge variant="outline">{{ task.priority }}</Badge>
                     </div>
-                    <span class="muted-foreground truncate text-sm">{{ task.project?.name }}</span>
+                    <span class="muted-foreground truncate text-sm">{{
+                        task.project?.name
+                    }}</span>
                 </CardContent>
             </Card>
         </div>
 
-        <p v-if="!tasks.length" class="text-muted-foreground text-sm">No tasks yet.</p>
+        <p v-if="!tasks.length" class="text-muted-foreground text-sm">
+            No tasks yet.
+        </p>
     </div>
 </template>

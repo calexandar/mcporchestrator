@@ -21,8 +21,14 @@ import {
 import { dashboard } from '@/routes';
 import { index as projectsIndex } from '@/routes/projects';
 import { index as tasksIndex } from '@/routes/tasks';
-import { index as taskDraftsIndex, show as taskDraftShow } from '@/routes/task-drafts';
-import { tokens as mcpTokensIndex, auditLog as auditLogIndex } from '@/routes/mcp';
+import {
+    index as taskDraftsIndex,
+    show as taskDraftShow,
+} from '@/routes/task-drafts';
+import {
+    tokens as mcpTokensIndex,
+    auditLog as auditLogIndex,
+} from '@/routes/mcp';
 
 const props = defineProps<{
     stats: {
@@ -128,16 +134,24 @@ const statCards: Array<{
                 :href="card.href"
                 class="group"
             >
-                <Card class="transition-colors group-hover:border-primary/40">
+                <Card class="group-hover:border-primary/40 transition-colors">
                     <CardContent class="flex items-center gap-4">
-                        <div class="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg">
+                        <div
+                            class="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg"
+                        >
                             <component :is="card.icon" class="size-5" />
                         </div>
                         <div class="flex-1 truncate">
-                            <p class="muted-foreground text-xs">{{ card.label }}</p>
-                            <p class="text-2xl font-semibold">{{ stats[card.value] }}</p>
+                            <p class="muted-foreground text-xs">
+                                {{ card.label }}
+                            </p>
+                            <p class="text-2xl font-semibold">
+                                {{ stats[card.value] }}
+                            </p>
                         </div>
-                        <ArrowRight class="text-muted-foreground size-4 opacity-0 transition-opacity group-hover:opacity-100" />
+                        <ArrowRight
+                            class="text-muted-foreground size-4 opacity-0 transition-opacity group-hover:opacity-100"
+                        />
                     </CardContent>
                 </Card>
             </Link>
@@ -148,7 +162,10 @@ const statCards: Array<{
                 <CardHeader class="flex-row items-center justify-between">
                     <div>
                         <CardTitle>Drafts awaiting approval</CardTitle>
-                        <CardDescription>MCP-created drafts need a human review.</CardDescription>
+                        <CardDescription
+                            >MCP-created drafts need a human
+                            review.</CardDescription
+                        >
                     </div>
                     <Button as-child variant="outline" size="sm">
                         <Link :href="taskDraftsIndex()">View all</Link>
@@ -156,17 +173,30 @@ const statCards: Array<{
                 </CardHeader>
                 <CardContent>
                     <ul v-if="recentDrafts.length" class="divide-y">
-                        <li v-for="draft in recentDrafts" :key="draft.id" class="flex items-center justify-between py-2">
+                        <li
+                            v-for="draft in recentDrafts"
+                            :key="draft.id"
+                            class="flex items-center justify-between py-2"
+                        >
                             <div class="min-w-0">
-                                <Link :href="taskDraftShow(draft.id)" class="truncate font-medium hover:underline">
+                                <Link
+                                    :href="taskDraftShow(draft.id)"
+                                    class="truncate font-medium hover:underline"
+                                >
                                     {{ draft.title }}
                                 </Link>
-                                <p class="muted-foreground text-xs">{{ draft.project?.name }}</p>
+                                <p class="muted-foreground text-xs">
+                                    {{ draft.project?.name }}
+                                </p>
                             </div>
-                            <Badge variant="secondary">{{ draft.priority }}</Badge>
+                            <Badge variant="secondary">{{
+                                draft.priority
+                            }}</Badge>
                         </li>
                     </ul>
-                    <p v-else class="text-muted-foreground text-sm">No pending drafts.</p>
+                    <p v-else class="text-muted-foreground text-sm">
+                        No pending drafts.
+                    </p>
                 </CardContent>
             </Card>
 
@@ -174,7 +204,9 @@ const statCards: Array<{
                 <CardHeader class="flex-row items-center justify-between">
                     <div>
                         <CardTitle>MCP tokens</CardTitle>
-                        <CardDescription>Recently created bearer tokens.</CardDescription>
+                        <CardDescription
+                            >Recently created bearer tokens.</CardDescription
+                        >
                     </div>
                     <Button as-child variant="outline" size="sm">
                         <Link :href="mcpTokensIndex()">Manage</Link>
@@ -182,17 +214,33 @@ const statCards: Array<{
                 </CardHeader>
                 <CardContent>
                     <ul v-if="recentTokens.length" class="divide-y">
-                        <li v-for="token in recentTokens" :key="token.id" class="flex items-center justify-between py-2">
+                        <li
+                            v-for="token in recentTokens"
+                            :key="token.id"
+                            class="flex items-center justify-between py-2"
+                        >
                             <div class="min-w-0">
-                                <p class="truncate font-medium">{{ token.name }}</p>
-                                <p class="muted-foreground text-xs font-mono">{{ token.token_prefix }}*****</p>
+                                <p class="truncate font-medium">
+                                    {{ token.name }}
+                                </p>
+                                <p class="muted-foreground font-mono text-xs">
+                                    {{ token.token_prefix }}*****
+                                </p>
                             </div>
-                            <Badge :variant="token.revoked_at ? 'destructive' : 'secondary'">
+                            <Badge
+                                :variant="
+                                    token.revoked_at
+                                        ? 'destructive'
+                                        : 'secondary'
+                                "
+                            >
                                 {{ token.revoked_at ? 'Revoked' : 'Active' }}
                             </Badge>
                         </li>
                     </ul>
-                    <p v-else class="text-muted-foreground text-sm">No tokens yet.</p>
+                    <p v-else class="text-muted-foreground text-sm">
+                        No tokens yet.
+                    </p>
                 </CardContent>
             </Card>
         </div>
@@ -201,7 +249,10 @@ const statCards: Array<{
             <CardHeader class="flex-row items-center justify-between">
                 <div>
                     <CardTitle>Recent MCP calls</CardTitle>
-                    <CardDescription>Audit trail for tools invoked over the MCP endpoint.</CardDescription>
+                    <CardDescription
+                        >Audit trail for tools invoked over the MCP
+                        endpoint.</CardDescription
+                    >
                 </div>
                 <Button as-child variant="outline" size="sm">
                     <Link :href="auditLogIndex()">Full log</Link>
@@ -209,19 +260,31 @@ const statCards: Array<{
             </CardHeader>
             <CardContent>
                 <ul v-if="recentAudit.length" class="divide-y">
-                    <li v-for="entry in recentAudit" :key="entry.id" class="flex items-center justify-between gap-4 py-2">
+                    <li
+                        v-for="entry in recentAudit"
+                        :key="entry.id"
+                        class="flex items-center justify-between gap-4 py-2"
+                    >
                         <div class="min-w-0">
-                            <p class="truncate font-mono text-sm">{{ entry.tool_name }}</p>
+                            <p class="truncate font-mono text-sm">
+                                {{ entry.tool_name }}
+                            </p>
                             <p class="muted-foreground text-xs">
                                 {{ entry.token?.name ?? 'unknown token' }}
                             </p>
                         </div>
-                        <Badge :variant="entry.success ? 'secondary' : 'destructive'">
+                        <Badge
+                            :variant="
+                                entry.success ? 'secondary' : 'destructive'
+                            "
+                        >
                             {{ entry.success ? 'ok' : entry.error_code }}
                         </Badge>
                     </li>
                 </ul>
-                <p v-else class="text-muted-foreground text-sm">No MCP activity yet.</p>
+                <p v-else class="text-muted-foreground text-sm">
+                    No MCP activity yet.
+                </p>
             </CardContent>
         </Card>
     </div>

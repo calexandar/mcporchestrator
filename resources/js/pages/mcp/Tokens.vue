@@ -23,7 +23,10 @@ import {
 } from '@/components/ui/select';
 import { dashboard } from '@/routes';
 import { tokens as mcpTokensIndex } from '@/routes/mcp';
-import { store as mcpTokensStore, revoke as revokeToken } from '@/routes/mcp/tokens';
+import {
+    store as mcpTokensStore,
+    revoke as revokeToken,
+} from '@/routes/mcp/tokens';
 
 const props = defineProps<{
     tokens: Array<{
@@ -111,11 +114,14 @@ function copyNewToken(): void {
                     Token created
                 </CardTitle>
                 <CardDescription>
-                    Copy this token now — it is shown only once and cannot be recovered.
+                    Copy this token now — it is shown only once and cannot be
+                    recovered.
                 </CardDescription>
             </CardHeader>
             <CardContent class="space-y-2">
-                <code class="block overflow-x-auto rounded-md bg-muted p-3 font-mono text-sm">
+                <code
+                    class="bg-muted block overflow-x-auto rounded-md p-3 font-mono text-sm"
+                >
                     {{ newToken }}
                 </code>
                 <Button variant="outline" size="sm" @click="copyNewToken">
@@ -129,24 +135,44 @@ function copyNewToken(): void {
                 <Card v-for="token in tokens" :key="token.id">
                     <CardHeader>
                         <div class="flex items-start justify-between gap-4">
-                            <CardTitle class="text-base">{{ token.name }}</CardTitle>
-                            <Badge :variant="token.revoked_at ? 'destructive' : 'secondary'">
+                            <CardTitle class="text-base">{{
+                                token.name
+                            }}</CardTitle>
+                            <Badge
+                                :variant="
+                                    token.revoked_at
+                                        ? 'destructive'
+                                        : 'secondary'
+                                "
+                            >
                                 {{ token.revoked_at ? 'Revoked' : 'Active' }}
                             </Badge>
                         </div>
-                        <CardDescription class="font-mono">{{ token.token_prefix }}**********</CardDescription>
+                        <CardDescription class="font-mono"
+                            >{{ token.token_prefix }}**********</CardDescription
+                        >
                     </CardHeader>
                     <CardContent class="space-y-3">
                         <div class="flex flex-wrap gap-1.5">
-                            <Badge v-for="scope in token.scopes" :key="scope" variant="outline">
+                            <Badge
+                                v-for="scope in token.scopes"
+                                :key="scope"
+                                variant="outline"
+                            >
                                 {{ scope }}
                             </Badge>
                         </div>
                         <p class="text-muted-foreground text-xs">
-                            {{ token.operations_count }} operations · {{ token.audit_logs_count }} log entries
-                            <template v-if="token.creator"> · created by {{ token.creator.name }}</template>
+                            {{ token.operations_count }} operations ·
+                            {{ token.audit_logs_count }} log entries
+                            <template v-if="token.creator">
+                                · created by {{ token.creator.name }}</template
+                            >
                         </p>
-                        <div v-if="!token.revoked_at" class="flex items-center justify-between pt-2 text-xs">
+                        <div
+                            v-if="!token.revoked_at"
+                            class="flex items-center justify-between pt-2 text-xs"
+                        >
                             <span class="text-muted-foreground">
                                 Expires {{ token.expires_at ?? 'never' }}
                             </span>
@@ -162,39 +188,67 @@ function copyNewToken(): void {
                         </div>
                     </CardContent>
                 </Card>
-                <p v-if="!tokens.length" class="text-muted-foreground text-sm">No tokens yet.</p>
+                <p v-if="!tokens.length" class="text-muted-foreground text-sm">
+                    No tokens yet.
+                </p>
             </div>
 
             <Card class="h-fit">
                 <CardHeader>
                     <CardTitle class="text-base">Create token</CardTitle>
-                    <CardDescription>Grant scopes for the MCP tools it may call.</CardDescription>
+                    <CardDescription
+                        >Grant scopes for the MCP tools it may
+                        call.</CardDescription
+                    >
                 </CardHeader>
                 <CardContent class="space-y-4">
                     <div class="space-y-2">
                         <Label for="token_name">Name</Label>
-                        <Input id="token_name" v-model="form.name" placeholder="e.g. staging-client" />
-                        <p v-if="form.errors.name" class="text-destructive text-sm">
+                        <Input
+                            id="token_name"
+                            v-model="form.name"
+                            placeholder="e.g. staging-client"
+                        />
+                        <p
+                            v-if="form.errors.name"
+                            class="text-destructive text-sm"
+                        >
                             {{ form.errors.name }}
                         </p>
                     </div>
 
                     <div class="space-y-2">
                         <Label>Scopes</Label>
-                        <div v-for="scope in scopes" :key="scope" class="flex items-center gap-2 text-sm">
+                        <div
+                            v-for="scope in scopes"
+                            :key="scope"
+                            class="flex items-center gap-2 text-sm"
+                        >
                             <Checkbox
                                 :checked="form.scopes.includes(scope)"
                                 :disabled="form.processing"
-                                @update:checked="(checked: boolean) => setScope(scope, checked)"
+                                @update:checked="
+                                    (checked: boolean) =>
+                                        setScope(scope, checked)
+                                "
                             />
-                            <label class="cursor-pointer select-none" @click="toggleScope(scope)">
-                                <code class="font-mono text-xs">{{ scope }}</code>
+                            <label
+                                class="cursor-pointer select-none"
+                                @click="toggleScope(scope)"
+                            >
+                                <code class="font-mono text-xs">{{
+                                    scope
+                                }}</code>
                             </label>
                         </div>
                         <p class="text-muted-foreground text-xs">
-                            All scopes are selected by default — uncheck any you do not want to grant.
+                            All scopes are selected by default — uncheck any you
+                            do not want to grant.
                         </p>
-                        <p v-if="form.errors.scopes" class="text-destructive text-sm">
+                        <p
+                            v-if="form.errors.scopes"
+                            class="text-destructive text-sm"
+                        >
                             {{ form.errors.scopes }}
                         </p>
                     </div>
@@ -212,12 +266,19 @@ function copyNewToken(): void {
                                 <SelectItem value="0">Never</SelectItem>
                             </SelectContent>
                         </Select>
-                        <p v-if="form.errors.days" class="text-destructive text-sm">
+                        <p
+                            v-if="form.errors.days"
+                            class="text-destructive text-sm"
+                        >
                             {{ form.errors.days }}
                         </p>
                     </div>
 
-                    <Button class="w-full" :disabled="form.processing" @click="create">
+                    <Button
+                        class="w-full"
+                        :disabled="form.processing"
+                        @click="create"
+                    >
                         Create
                     </Button>
                 </CardContent>

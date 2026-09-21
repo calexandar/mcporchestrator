@@ -62,15 +62,15 @@ Add the remote server to `opencode.json`:
 
 ```json
 {
-  "mcp": {
-    "laravel-mcp-lab": {
-      "type": "remote",
-      "url": "http://localhost:8000/api/mcp",
-      "headers": {
-        "Authorization": "Bearer {env:LARAVEL_MCP_TOKEN}"
-      }
+    "mcp": {
+        "laravel-mcp-lab": {
+            "type": "remote",
+            "url": "http://localhost:8000/api/mcp",
+            "headers": {
+                "Authorization": "Bearer {env:LARAVEL_MCP_TOKEN}"
+            }
+        }
     }
-  }
 }
 ```
 

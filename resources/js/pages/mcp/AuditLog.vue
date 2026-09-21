@@ -41,14 +41,18 @@ defineOptions({
         <div>
             <h1 class="text-2xl font-semibold tracking-tight">Audit log</h1>
             <p class="text-muted-foreground text-sm">
-                Every tool invocation made through the MCP endpoint, newest first.
+                Every tool invocation made through the MCP endpoint, newest
+                first.
             </p>
         </div>
 
         <Card>
             <CardHeader>
                 <CardTitle class="text-base">MCP tool calls</CardTitle>
-                <CardDescription>{{ entries.length }} shown of the latest activity.</CardDescription>
+                <CardDescription
+                    >{{ entries.length }} shown of the latest
+                    activity.</CardDescription
+                >
             </CardHeader>
             <CardContent>
                 <div v-if="entries.length" class="divide-y">
@@ -58,26 +62,44 @@ defineOptions({
                         class="flex flex-wrap items-center justify-between gap-3 py-3"
                     >
                         <div class="min-w-0">
-                            <p class="truncate font-mono text-sm">{{ entry.tool_name }}</p>
+                            <p class="truncate font-mono text-sm">
+                                {{ entry.tool_name }}
+                            </p>
                             <p class="text-muted-foreground text-xs">
                                 {{ entry.token?.name ?? 'unknown token' }}
-                                <template v-if="entry.input_hash"> · sha256 {{ entry.input_hash.slice(0, 12) }}…</template>
+                                <template v-if="entry.input_hash">
+                                    · sha256
+                                    {{
+                                        entry.input_hash.slice(0, 12)
+                                    }}…</template
+                                >
                             </p>
-                            <p v-if="entry.metadata" class="text-muted-foreground text-xs">
+                            <p
+                                v-if="entry.metadata"
+                                class="text-muted-foreground text-xs"
+                            >
                                 {{ entry.metadata.duration_ms ?? '–' }} ms
                             </p>
                         </div>
                         <div class="flex shrink-0 items-center gap-2">
-                            <Badge :variant="entry.success ? 'secondary' : 'destructive'">
+                            <Badge
+                                :variant="
+                                    entry.success ? 'secondary' : 'destructive'
+                                "
+                            >
                                 {{ entry.success ? 'ok' : entry.error_code }}
                             </Badge>
-                            <span class="text-muted-foreground whitespace-nowrap text-xs">
+                            <span
+                                class="text-muted-foreground text-xs whitespace-nowrap"
+                            >
                                 {{ entry.created_at }}
                             </span>
                         </div>
                     </div>
                 </div>
-                <p v-else class="text-muted-foreground text-sm">No MCP activity recorded yet.</p>
+                <p v-else class="text-muted-foreground text-sm">
+                    No MCP activity recorded yet.
+                </p>
             </CardContent>
         </Card>
     </div>

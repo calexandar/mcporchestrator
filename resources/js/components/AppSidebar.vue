@@ -27,7 +27,10 @@ import { dashboard } from '@/routes';
 import { index as projectsIndex } from '@/routes/projects';
 import { index as tasksIndex } from '@/routes/tasks';
 import { index as taskDraftsIndex } from '@/routes/task-drafts';
-import { tokens as mcpTokensIndex, auditLog as auditLogIndex } from '@/routes/mcp';
+import {
+    tokens as mcpTokensIndex,
+    auditLog as auditLogIndex,
+} from '@/routes/mcp';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [

@@ -41,7 +41,8 @@ defineOptions({
         <div>
             <h1 class="text-2xl font-semibold tracking-tight">Projects</h1>
             <p class="text-muted-foreground text-sm">
-                Projects organize tasks, drafts, and notes exposed through the MCP lab.
+                Projects organize tasks, drafts, and notes exposed through the
+                MCP lab.
             </p>
         </div>
 
@@ -53,18 +54,30 @@ defineOptions({
                             <FolderKanban class="text-primary size-5" />
                             {{ project.name }}
                         </CardTitle>
-                        <Badge :variant="project.status === 'archived' ? 'destructive' : 'secondary'">
+                        <Badge
+                            :variant="
+                                project.status === 'archived'
+                                    ? 'destructive'
+                                    : 'secondary'
+                            "
+                        >
                             {{ project.status }}
                         </Badge>
                     </div>
-                    <CardDescription class="font-mono">{{ project.slug }}</CardDescription>
-                    <CardDescription v-if="project.description" class="line-clamp-2">
+                    <CardDescription class="font-mono">{{
+                        project.slug
+                    }}</CardDescription>
+                    <CardDescription
+                        v-if="project.description"
+                        class="line-clamp-2"
+                    >
                         {{ project.description }}
                     </CardDescription>
                 </CardHeader>
                 <CardContent class="flex items-center justify-between gap-4">
                     <p class="text-muted-foreground text-sm">
-                        {{ project.tasks_count }} tasks · {{ project.notes_count }} notes
+                        {{ project.tasks_count }} tasks ·
+                        {{ project.notes_count }} notes
                     </p>
                     <Link
                         :href="show(project.id)"
