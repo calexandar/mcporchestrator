@@ -1,0 +1,19 @@
+name: Task
+description: A scoped piece of work (usually derived from an epic or the implementation plan)
+title: "[Task] "
+labels: [task]
+body:
+  - type: textarea
+    id: definition
+    attributes:
+      label: Definition of done
+      description: What must be true for this task to be considered complete?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Concrete, verifiable checks (assertions, tests, manual smoke steps).
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a problem with the MCP laboratory or the web UI
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened, and what did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: The shortest way to trigger the bug. Include the MCP method and arguments if relevant.
+      placeholder: |
+        1. Call tools/list with a valid token
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: PHP, Laravel, and frontend versions (or the server logs / MCP audit entry).
+    validations:
+      required: true
