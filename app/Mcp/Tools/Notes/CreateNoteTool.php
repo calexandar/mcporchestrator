@@ -36,7 +36,7 @@ final class CreateNoteTool extends Tool
         ];
     }
 
-    protected function run(Request $request): Response|ResponseFactory
+    protected function run(Request $request): ResponseFactory
     {
         $input = McpInput::make($request->all());
 

@@ -14,6 +14,7 @@ use App\Mcp\Tools\Tasks\ListTasksTool;
 use App\Mcp\Tools\Tasks\UpdateTaskDraftTool;
 use Laravel\Mcp\Server;
 use Laravel\Mcp\Server\Contracts\Transport;
+use Laravel\Mcp\Server\Tool as ServerTool;
 
 final class LabServer extends Server
 {
@@ -29,7 +30,7 @@ final class LabServer extends Server
     ];
 
     /**
-     * @var array<int, class-string>
+     * @var array<int, class-string<ServerTool>>
      */
     protected array $tools = [
         ListProjectsTool::class,
